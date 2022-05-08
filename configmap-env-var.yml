@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-config
+data:
+  TEST_ENV: test
+
+--- ##３つのバーで区切る１つのymalで複数のオブジェクトを書くことができる
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  labels:
+    name: test-pod
+spec:
+  restartPolicy: Never
+  containers:
+    - name: busybox
+      image: k8s.gcr.io/busybox
+      command: ["env"]
+      envFrom:
+      - configMapRef:
+          name: test-config
+

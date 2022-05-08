@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicaSet
+metadata: #レプリカセットに対するメタデータ
+  name: nginx #レプリカセットの名前がnginx
+  labels: #レプリカセットに対してラベルをつける
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
